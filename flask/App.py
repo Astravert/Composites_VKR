@@ -226,4 +226,8 @@ def mn_predict():
         message = f'Спрогнозированное значение соотношения матрица-наполнитель для введённых параметров: {mn_prediction(params)[0, 0]} ГПа'
 
     return render_template('mn.html', message=message)
+            
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
 
