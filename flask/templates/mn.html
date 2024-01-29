@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет соотношения матрица-наполнитель</title>
+    <style>
+        body {
+            font-family: 'Roboto, sans-serif';
+            margin: 0;
+            position: relative;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            border: 2px solid white;
+            padding: 7px 14px;
+            border-radius: 5px;
+            margin-bottom: 7px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 7px;
+            border-radius: 5px;
+            width: 60%;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        fieldset {
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            padding: 7px;
+        }
+
+        legend {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        input {
+            width: calc(100% - 10px);
+            padding: 4px;
+            margin-bottom: 5px;
+            border: 1px solid #3498db;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 7px;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 24px;
+            border-radius: 5px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            margin-top: 7px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <video autoplay muted loop>
+        <source src="../static/6.mp4" type="video/mp4">
+    </video>
+
+    <div class="content">
+        <h1>Расчет соотношения матрица-наполнитель</h1>
+
+        <form action="" method="post">
+            <fieldset>
+                <legend>Введите значения, входящие в указанные диапазоны</legend>
+                <br><br>
+                <label for="pr">Прочность при растяжении (1250...3705), МПа:</label><input type="float" name="pr" required>
+                <label for="upr">Модуль упругости при растяжении (65...81), МПа:</label><input type="float" name="upr" required>
+                <label for="plot">Плотность, кг/м3 (1700...2300):</label><input type="float" name="plot" required>
+                <label for="mup">Модуль упругости, ГПа (2...2000):</label><input type="float" name="mup" required>
+                <label for="ko">Количество отвердителя, м.% (17...200):</label><input type="float" name="ko" required>
+                <label for="seg">Содержание эпоксидных групп,% (14...34):</label><input type="float" name="seg" required>
+                <label for="tv">Температура вспышки, С (100...414):</label><input type="float" name="tv" required>
+                <label for="pp">Поверхностная плотность, г/м2 (0.6...1400):</label><input type="float" name="pp" required>
+                <label for="un">Угол нашивки, град (0 или 90):</label><input type="float" name="un" required>
+                <label for="ps">Потребление смолы, г/м2 (33...414):</label><input type="float" name="ps" required>
+                <label for="shn">Шаг нашивки (0...15):</label><input type="float" name="shn" required>
+                <label for="pln">Плотность нашивки (0...104):</label><input type="float" name="pln" required>
+
+                <div class="calculate" align="center"><input type="submit" value="Рассчитать"></div>
+
+            </fieldset>
+        </form>
+
+        <div class="result">
+            {% if message %}
+            <br><b><div>{{message}}</div></b>
+            {% endif %}
+        </div>
+
+        <a href="{{url_for('choose_prediction_method')}}"><button>Вернуться на главную страницу</button></a>
+    </div>
+</body>
+
+</html>
